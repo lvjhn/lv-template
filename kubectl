@@ -1,0 +1,14 @@
+#!/bin/bash
+source .env
+
+# Loop through arguments to see if "--" exists
+for i in "$@"; do
+    if [[ "$i" == "--" ]]; then
+        # Split args into kubectl_args and command_args
+        break
+    fi
+done
+
+# Simpler solution: always insert -n before -- or last positional argument
+
+kubectl -n "$PROJECT_MODE-$PROJECT_NAME" "$@"

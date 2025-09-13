@@ -1,0 +1,17 @@
+
+# --- GENERAL INFORMATION --- #
+apiVersion: v2
+name: lv-template
+description: Development Helm chart for the Laravel + Vue stack
+type: application
+version: 0.1.0
+appVersion: "dev"
+
+# --- HELM CHARTS --- # 
+dependencies:
+  - name: postgresql
+    version: 15.5.17
+    repository: https://charts.bitnami.com/bitnami
+  - name: redis
+    version: 19.6.0
+    repository: https://charts.bitnami.com/bitnami

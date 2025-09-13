@@ -1,0 +1,36 @@
+# --- GENERAL INFORMATION --- # 
+project: 
+  name: lv-template
+  namespace: dev-lv-template 
+  path: /home/lvjhn/Projects/templates/kh-lv-template
+
+# --- COMMON CONFIGURATION --- #
+ingress:
+  className: nginx
+
+global:
+  imagePullPolicy: IfNotPresent
+
+# --- DATA STORAGE CHARTS --- # 
+postgresql:
+  fullnameOverride: lv-template-db  # <-- ensures pod/service name
+  enabled: true
+  primary:
+    persistence:
+      enabled: true
+      size: 5Gi
+      storageClass: "standard"  # Or whatever your cluster has
+  service:
+    type: NodePort  # instead of ClusterIP
+    port: 5432
+    nodePort: 30042  # optional, if you want a fixed port 
+
+
+redis:
+  fullnameOverride: lv-template-kvs
+  architecture: standalone
+  master:
+    persistence:
+      enabled: true
+      size: 2Gi
+      storageClass: "standard"  # or whatever your cluster has
